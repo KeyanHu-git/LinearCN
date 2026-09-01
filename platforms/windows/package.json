@@ -1,6 +1,6 @@
 {
-  "name": "linearcn-enhanced-windows-installer",
-  "version": "1.5.4",
+  "name": "linearcn-windows-installer",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {

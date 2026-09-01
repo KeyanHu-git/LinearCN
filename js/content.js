@@ -11,13 +11,19 @@
   const baseEntries = globalThis.LinearCNBaseEntries || [];
   const enhancedEntries = globalThis.LinearCNEnhancedEntries || [];
   const settingsEntries = globalThis.LinearCNSettingsEntries || [];
+  const nestedSettingsEntries = globalThis.LinearCNNestedSettingsEntries || [];
+  const integrationEntries = globalThis.LinearCNIntegrationEntries || [];
   const qualityEntries = globalThis.LinearCNQualityEntries || [];
   const dynamicPatterns = [
     ...(globalThis.LinearCNEnhancedPatterns || []),
-    ...(globalThis.LinearCNSettingsPatterns || [])
+    ...(globalThis.LinearCNSettingsPatterns || []),
+    ...(globalThis.LinearCNNestedSettingsPatterns || [])
   ];
-  const translations = new Map([...baseEntries, ...enhancedEntries, ...settingsEntries, ...qualityEntries]);
+  const translations = new Map([...baseEntries, ...enhancedEntries, ...settingsEntries, ...nestedSettingsEntries, ...integrationEntries, ...qualityEntries]);
   const normalizedTranslations = new Map();
+  const enqueue = typeof queueMicrotask === "function"
+    ? queueMicrotask
+    : callback => Promise.resolve().then(callback);
   const translatedAttributes = ["aria-label", "aria-placeholder", "data-empty-text", "data-label", "placeholder", "title", "alt"];
   const protectedSelector = [
     "input",
@@ -187,7 +193,7 @@
     if (node) pending.add(node);
     if (scheduled) return;
     scheduled = true;
-    requestAnimationFrame(flush);
+    enqueue(flush);
   }
 
   function start() {
@@ -220,7 +226,7 @@
   globalThis.LinearCNEngine = {
     translateString,
     getStats: () => ({ ...stats }),
-    version: "1.5.4"
+    version: "1.0.0"
   };
 
   if (typeof document !== "undefined") {

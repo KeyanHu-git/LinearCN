@@ -10,7 +10,7 @@ const vm = require("node:vm");
 
 const root = path.resolve(__dirname, "..");
 const context = vm.createContext({ globalThis: {} });
-for (const file of ["translations-base.js", "translations-enhanced.js", "translations-settings.js", "translations-quality.js"]) {
+for (const file of ["translations-base.js", "translations-enhanced.js", "translations-settings.js", "translations-settings-nested.js", "translations-integrations.js", "translations-quality.js"]) {
   vm.runInContext(fs.readFileSync(path.join(root, "js", file), "utf8"), context, { filename: file });
 }
 
@@ -18,6 +18,8 @@ const layers = [
   ["base", context.globalThis.LinearCNBaseEntries || []],
   ["enhanced", context.globalThis.LinearCNEnhancedEntries || []],
   ["settings", context.globalThis.LinearCNSettingsEntries || []],
+  ["nestedSettings", context.globalThis.LinearCNNestedSettingsEntries || []],
+  ["integrations", context.globalThis.LinearCNIntegrationEntries || []],
   ["quality", context.globalThis.LinearCNQualityEntries || []]
 ];
 

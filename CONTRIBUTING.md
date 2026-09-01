@@ -37,6 +37,8 @@ LinearCN 接受漏译、错译、运行故障和平台改进。先提交能够�
 | --- | --- |
 | 常规页面和弹层 | `js/translations-enhanced.js` |
 | 设置、集成、登录和管理页面 | `js/translations-settings.js` |
+| 二级设置页和详情页 | `js/translations-settings-nested.js` |
+| 集成详情页和连接说明 | `js/translations-integrations.js` |
 | 术语与语义修正 | `scripts/generate-quality-overrides.cjs` |
 | DOM 匹配或保护边界 | `js/content.js` |
 | 平台安装与交付 | `platforms/` |

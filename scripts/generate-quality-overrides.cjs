@@ -10,14 +10,16 @@ const vm = require("node:vm");
 
 const root = path.resolve(__dirname, "..");
 const context = vm.createContext({ globalThis: {} });
-for (const file of ["translations-base.js", "translations-enhanced.js", "translations-settings.js"]) {
+for (const file of ["translations-base.js", "translations-enhanced.js", "translations-settings.js", "translations-settings-nested.js", "translations-integrations.js"]) {
   vm.runInContext(fs.readFileSync(path.join(root, "js", file), "utf8"), context, { filename: file });
 }
 
 const effective = new Map([
   ...(context.globalThis.LinearCNBaseEntries || []),
   ...(context.globalThis.LinearCNEnhancedEntries || []),
-  ...(context.globalThis.LinearCNSettingsEntries || [])
+  ...(context.globalThis.LinearCNSettingsEntries || []),
+  ...(context.globalThis.LinearCNNestedSettingsEntries || []),
+  ...(context.globalThis.LinearCNIntegrationEntries || [])
 ]);
 
 const overrides = new Map();

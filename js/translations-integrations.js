@@ -1,0 +1,85 @@
+// Maintained translations for integration detail pages.
+// Integration and company names, handles, domains, shortcuts, and code remain unchanged.
+globalThis.LinearCNIntegrationEntries = [
+  // Shared integration details
+  ["Availability", "可用范围"],
+  ["Pricing", "价格"],
+  ["Workspace admin", "工作区管理员"],
+  ["Browser and desktop app", "浏览器与桌面应用"],
+  ["connectors", "连接器"],
+  ["Navigate to the", "前往"],
+  ["once you've opened a Claude Code session to go through the authentication flow.", "，然后在打开 Claude Code 会话后完成身份验证流程。"],
+  ["page in Claude settings and connect Linear.", "页面，并在 Claude 设置中连接 Linear。"],
+  ["then run", "然后运行"],
+
+  // Codex
+  ["Add @Codex to your issues", "将 @Codex 添加到议题"],
+  ["Codex in Linear is available to ChatGPT users on Plus, Pro Business, Enterprise, or Edu plans.", "Linear 中的 Codex 适用于 ChatGPT Plus、Pro、Business、Enterprise 和 Edu 套餐用户。"],
+  ["Codex is a coding agent that can take on entire tasks on your behalf, straight from Linear. When you assign or mention", "Codex 是可以直接从 Linear 代您承接完整任务的编码智能体。当您分配或提及"],
+  ["in an issue, Codex spins up a cloud agent to start working, posting updates back to Linear as it makes progress. It posts a link to the completed task in Codex cloud for you to review, create a PR, or continue working.", "时，Codex 会启动云端智能体开始工作，并在推进过程中将更新同步回 Linear。任务完成后，它会发布 Codex 云端任务链接，供您审查、创建 PR 或继续处理。"],
+  ["Codex looks at the context in the issue to decide which Codex Cloud Environment to use, or you can also mention the name of the environment you intend, such as by writing", "Codex 会根据议题上下文选择要使用的 Codex 云环境；您也可以提及目标环境名称，例如输入"],
+  ["Install the Codex agent in your Linear workspace", "在 Linear 工作区中安装 Codex 智能体"],
+  ["Set up Codex Cloud Tasks", "设置 Codex 云任务"],
+  ["set up an environment", "设置环境"],
+  ["connecting GitHub", "连接 GitHub"],
+  ["If you don’t have one yet, sign up for a Plus, Pro, Business, Enterprise, or Edu plan. (", "如果尚未订阅，请注册 Plus、Pro、Business、Enterprise 或 Edu 套餐。（"],
+  [". If you’re on an Enterprise plan, you may first need to ask your ChatGPT workspace admin to enable both Codex Cloud Tasks in", "。如果使用 Enterprise 套餐，可能需要先请 ChatGPT 工作区管理员在以下位置启用 Codex 云任务："],
+  ["). Then enable Cloud Tasks by", "）。然后通过以下方式启用云任务："],
+  [". Codex will update the issues with suggested solutions for you to approve and finalize.", "。Codex 会使用建议的解决方案更新议题，供您批准并最终确认。"],
+  ["in an issue or assigning them one to kick off the agent session.", "或将议题分配给它，即可启动智能体会话。"],
+  ["A screenshot of a notification in the Linear inbox with the Codex agent announcing that it has finished a task", "Linear 收件箱中的 Codex 智能体任务完成通知截图"],
+  ["A screenshot of the codex agent in linear", "Linear 中的 Codex 智能体截图"],
+
+  // GitHub Copilot
+  ["Analyze the issue contents and open a draft pull request", "分析议题内容并创建草稿拉取请求"],
+  ["Automate repetitive tasks like bug fixes, refactors, and documentation updates", "自动处理错误修复、重构和文档更新等重复任务"],
+  ["Follow your existing review and approval rules for every pull request Copilot creates", "对 Copilot 创建的每个拉取请求沿用现有审查和批准规则"],
+  ["Get started by selecting a GitHub repository for the Copilot agent", "选择供 Copilot 智能体使用的 GitHub 仓库以开始设置"],
+  ["Reduce manual steps and context switching between Linear and GitHub", "减少 Linear 与 GitHub 之间的手动步骤和上下文切换"],
+  ["Request a pull request review from you when work is completed", "工作完成后请求您审查拉取请求"],
+  ["Stream progress updates back to your Linear activity timeline", "将进度更新持续同步到 Linear 活动时间线"],
+  ["Users must link their GitHub account to Linear in order to use the integration (users will be prompted to do this in the UI)", "用户必须将 GitHub 账号关联到 Linear 才能使用此集成，界面会提示用户完成关联。"],
+  ["When you assign a Linear issue to Copilot, it will:", "将 Linear 议题分配给 Copilot 后，它将："],
+  ["Work independently in its own ephemeral development environment, powered by GitHub Actions. Within this environment, Copilot can explore your code, make changes, run automated tests and linters, and more.", "在由 GitHub Actions 提供支持的独立临时开发环境中工作。Copilot 可以在该环境中浏览代码、进行修改、运行自动化测试和代码检查等。"],
+  ["You can now assign issues in Linear to GitHub Copilot coding agent, GitHub's asynchronous, autonomous background agent.", "现在可以将 Linear 议题分配给 GitHub Copilot 编码智能体，即 GitHub 的异步自主后台智能体。"],
+
+  // Claude and ChatGPT
+  ["Claude is a conversational AI assistant from Anthropic. By connecting it to Linear via the MCP server, Claude can search, create, and update Linear issues, projects, and comments directly from a conversation.", "Claude 是 Anthropic 推出的对话式 AI 助手。通过 MCP 服务器连接 Linear 后，Claude 可以直接在对话中搜索、创建和更新 Linear 议题、项目及评论。"],
+  ["Linear and Claude logos on a black background", "黑色背景上的 Linear 与 Claude 标志"],
+  ["Connect Linear to ChatGPT from the", "从以下位置将 Linear 连接到 ChatGPT："],
+  ["Connect Linear to ChatGPT through deep research to reference internal sources & pull in real-time context—keeping existing user-level permissions.", "通过深度研究将 Linear 连接到 ChatGPT，在保留现有用户级权限的同时引用内部来源并获取实时上下文。"],
+  ["connector settings.", "连接器设置。"],
+  ["Linear connector in deep research on ChatGPT", "ChatGPT 深度研究中的 Linear 连接器"],
+  ["Once connected, you can add Linear as a source when using deep research mode in ChatGPT. The Linear connector is available in deep research for Plus & Pro users (excl. EEA, CH, UK) and Team, Enterprise & Edu users.", "连接后，可以在 ChatGPT 深度研究模式中将 Linear 添加为来源。Linear 连接器适用于 Plus 和 Pro 用户（不含欧洲经济区、瑞士和英国），以及 Team、Enterprise 和 Edu 用户。"],
+  ["The ChatGPT Connector for Linear helps you explore and reference your team's work while staying in the flow of research. When used in Deep Research Mode, it enhances ChatGPT’s ability to surface Linear issues, projects, and discussions relevant to your current context.", "Linear 的 ChatGPT 连接器可在研究过程中探索并引用团队工作。配合深度研究模式使用时，ChatGPT 能更好地检索与当前上下文相关的 Linear 议题、项目和讨论。"],
+
+  // Cursor and v0
+  ["Assign any Linear issue to Cursor, and a cloud agent will get to work. You can track progress directly in Linear, the Cursor web app, or your IDE. Once the task is complete, the Cursor agent will update the issue automatically with a PR.", "将任意 Linear 议题分配给 Cursor 后，云端智能体会开始工作。您可以直接在 Linear、Cursor Web 应用或 IDE 中跟踪进度。任务完成后，Cursor 智能体会自动使用 PR 更新议题。"],
+  ["On Cursor's Pro or Ultra plans, an admin can install the cloud agent to your workspace from", "使用 Cursor Pro 或 Ultra 套餐时，管理员可以从以下位置将云端智能体安装到工作区："],
+  ["When you connect Cursor with Linear, you can assign any issue in Linear directly to Cursor. Once assigned, Cursor automatically spins up a cloud agent to begin tackling the task. The agent works in context of the issue, pulling in the relevant details from Linear so that progress always stays aligned with the original request.", "连接 Cursor 与 Linear 后，可以直接将任意 Linear 议题分配给 Cursor。分配后，Cursor 会自动启动云端智能体处理任务。智能体会读取 Linear 中的相关详情，并始终根据原始请求推进工作。"],
+  ["A list of issues in progress that are assigned to Cursor", "已分配给 Cursor 的进行中议题列表"],
+  ["A screenshot of the @mention function", "@提及功能截图"],
+  ["Add new global MCP server", "添加新的全局 MCP 服务器"],
+  ["Add the following:", "添加以下内容："],
+  ["Cursor is a code editor designed for AI-assisted development. Connecting Linear’s MCP server lets Cursor’s inline agent open context from your issues or create new issues without leaving the IDE.", "Cursor 是面向 AI 辅助开发的代码编辑器。连接 Linear MCP 服务器后，Cursor 的内联智能体无需离开 IDE 即可打开议题上下文或创建新议题。"],
+  ["Linear and Cursor logo on a black background", "黑色背景上的 Linear 与 Cursor 标志"],
+  ["to open Cursor Settings.", "打开 Cursor 设置。"],
+  ["Connect the Linear MCP server to v0 so that you can pull issues, projects, and specs directly from Linear into v0 and start building. No more copy-pasting issues or switching between tabs - your Linear workspace becomes part of your development workflow in v0.", "将 Linear MCP 服务器连接到 v0，即可直接把 Linear 中的议题、项目和规格导入 v0 并开始构建。无需再复制粘贴议题或切换标签页，Linear 工作区会成为 v0 开发流程的一部分。"],
+  ["The integration connects your issue tracking directly to your development environment in v0. Pull any Linear issue, project brief, or feature spec into v0 and use it as context while you build. Whether you're working on a bug fix, new feature, or technical task, you can reference the original Linear issue without leaving v0.", "此集成将议题跟踪直接连接到 v0 开发环境。可以把任意 Linear 议题、项目简介或功能规格导入 v0 作为构建上下文。无论处理错误修复、新功能还是技术任务，都能在不离开 v0 的情况下引用原始 Linear 议题。"],
+  ["To enable access to the Linear MCP server from v0, open your v0 settings and connect your Linear workspace", "要让 v0 访问 Linear MCP 服务器，请打开 v0 设置并连接 Linear 工作区"],
+  ["Using v0s MCP connector for Linear", "使用 v0 的 Linear MCP 连接器"],
+  ["v0 is an AI agent that helps anyone create real code and full-stack apps. Ship features, refine designs, update copy, and create live prototypes — all with a prompt. Deploy to production immediately, or open a pull request for review.", "v0 是帮助用户创建真实代码和全栈应用的 AI 智能体。通过提示词即可交付功能、完善设计、更新文案并创建可运行原型，还可以直接部署到生产环境或创建拉取请求进行审查。"],
+
+  // Devin and Factory
+  ["A summary of the current code", "当前代码摘要"],
+  ["An implementation plan", "实施计划"],
+  ["Any edge cases or questions that need your attention", "需要您关注的边界情况或问题"],
+  ["Devin has the self-awareness to report 🔴/🟠/🟢 confidence estimates next to its suggestions. You can assign Devin to multiple issues at once, too.", "Devin 会在建议旁使用 🔴/🟠/🟢 报告置信度估计。您也可以同时将多个议题分配给 Devin。"],
+  ["The Devin integration for Linear connects Devin's autonomous AI software engineering capabilities directly to your Linear workflow. Devin analyzes engineering tasks, scopes issues, and suggests implementation plans within your existing Linear environment.", "Linear 的 Devin 集成将 Devin 的自主 AI 软件工程能力直接接入 Linear 工作流。Devin 会在现有 Linear 环境中分析工程任务、界定议题范围并提出实施计划。"],
+  ["Tagging Linear issues with the devin label", "为 Linear 议题添加 devin 标签"],
+  ["tagging the Devin AI agent in Linear", "在 Linear 中提及 Devin AI 智能体"],
+  ["Delegate any Linear issue to Factory, and an autonomous Droid spins up to handle it. Droids work in isolated cloud environments, pulling full context from your issues: descriptions, comments, linked tickets, and dependencies. Track real-time progress as Droids code, test, and create pull requests, all without leaving Linear.", "将任意 Linear 议题委派给 Factory 后，自主 Droid 会启动并处理任务。Droid 在隔离的云环境中工作，读取议题描述、评论、关联工单和依赖等完整上下文。无需离开 Linear，即可实时跟踪 Droid 编码、测试和创建拉取请求的进度。"],
+  ["Scale your engineering capacity instantly by running tens or hundreds simultaneously, each in its own isolated environment. Factory's remote workspace architecture enables parallelized work through concurrent Droids.", "同时运行数十或数百个独立环境即可快速扩展工程能力。Factory 的远程工作区架构通过并发 Droid 实现并行工作。"],
+  ["When complete, Factory opens a pull request linked to the original issue and emits a final summary. PR Review Droids automatically review the code once it lands in GitHub or GitLab, providing feedback. From assignment to review, the entire pipeline runs without manual intervention.", "任务完成后，Factory 会创建关联原始议题的拉取请求并生成最终摘要。代码进入 GitHub 或 GitLab 后，PR Review Droid 会自动审查并提供反馈。从分配到审查，整个流程无需人工干预。"],
+  ["Assign work to Code Droid agent directly within Linear.", "直接在 Linear 中将工作分配给 Code Droid 智能体。"]
+];

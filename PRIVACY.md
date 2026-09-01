@@ -1,6 +1,6 @@
 # Privacy policy
 
-LinearCN Enhanced performs local interface-text replacement on Linear pages.
+LinearCN performs local interface-text replacement on Linear pages.
 
 ## Data collection
 

@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "LinearCN Enhanced",
-  "short_name": "LinearCN+",
+  "name": "LinearCN",
+  "short_name": "LinearCN",
   "description": "面向新版 Linear 的增强简体中文本地化",
-  "version": "1.5.4",
+  "version": "1.0.0",
   "icons": {
     "16": "img/favicon-16x16.png",
     "48": "img/favicon-48x48.png",
@@ -16,6 +16,8 @@
         "js/translations-base.js",
         "js/translations-enhanced.js",
         "js/translations-settings.js",
+        "js/translations-settings-nested.js",
+        "js/translations-integrations.js",
         "js/translations-quality.js",
         "js/content.js"
       ],

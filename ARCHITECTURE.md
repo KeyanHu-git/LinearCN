@@ -12,7 +12,7 @@ LinearCN 将“翻译内容”“运行时引擎”“平台交付”和“维�
                                                      └─> Windows WebContents 兜底
 ```
 
-词表优先级固定为：`base < enhanced < settings < quality`。后层可以纠正前层，但不得把用户内容纳入通用替换。
+词表优先级固定为：`base < enhanced < settings < nested settings < integrations < quality`。后层可以纠正前层，但不得把用户内容纳入通用替换。
 
 ## 一级目录职责
 

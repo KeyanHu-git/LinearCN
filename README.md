@@ -27,26 +27,6 @@ LinearCN 不是整页机器翻译器。它使用人工维护的词表和轻量 D
 - 同一套词表用于浏览器、Userscript 和 Windows 桌面端。
 - 通过回归测试与质量审计持续检查漏译、冲突和语义错误。
 
-## 当前覆盖
-
-| 区域 | 已覆盖内容 |
-| --- | --- |
-| 日常协作 | 导航、议题、积压事项、分诊、周期、通知 |
-| 项目管理 | 项目、倡议、里程碑、模板、状态、更新 |
-| 工作区管理 | 成员、团队、安全、计费、用量、导入导出 |
-| AI 与智能体 | Linear Agent、智能体个性化、MCP、工作区指导 |
-| 连接与扩展 | 集成、API、OAuth、应用目录与帮助菜单 |
-
-## 下载文件
-
-| 文件 | 用途 |
-| --- | --- |
-| `*-chromium.zip` | Chrome、Edge、Brave、Arc、Opera |
-| `*-firefox.zip` | Firefox 桌面版 |
-| `*.user.js` | Tampermonkey 等用户脚本管理器 |
-| `*-windows-desktop-installer.zip` | Linear Windows 桌面端 |
-| `*-macOS.zip` | macOS 浏览器与 Userscript 方案 |
-
 ## 支持平台
 
 | 平台 | 状态 |
@@ -61,33 +41,26 @@ LinearCN 不是整页机器翻译器。它使用人工维护的词表和轻量 D
 
 ## 安装
 
-### Chrome / Edge
+**Chrome / Edge：** 下载并解压 `LinearCN-*-chromium.zip`，打开 `chrome://extensions` 或 `edge://extensions`，开启开发者模式，选择“加载已解压的扩展”，然后刷新 Linear。
 
-1. 下载并解压 `LinearCN-Enhanced-*-chromium.zip`。
-2. 打开 `chrome://extensions` 或 `edge://extensions`。
-3. 开启开发者模式，选择“加载已解压的扩展”。
-4. 刷新 Linear。
+**Firefox：** 下载并解压 `LinearCN-*-firefox.zip`，在 `about:debugging#/runtime/this-firefox` 中选择“临时载入附加组件”，打开 `manifest.json`。
 
-### Firefox
+**Userscript：** 将 `LinearCN-*.user.js` 导入 Tampermonkey 等用户脚本管理器，然后刷新 Linear。
 
-解压 Firefox 安装包，在 `about:debugging#/runtime/this-firefox` 中选择“临时载入附加组件”，然后打开 `manifest.json`。
-
-### Windows 桌面端
-
-安装器目前只支持 Linear Desktop 1.32.2。完全退出 Linear 后，在解压目录执行：
+**Windows 桌面端：** 当前支持 Linear Desktop 1.32.2。完全退出 Linear，在解压后的安装器目录执行：
 
 ```powershell
 npm install
 node install.mjs --app-asar "C:\path\to\Linear\resources\app.asar"
 ```
 
-回滚时执行：
+**Windows 回滚：** 在安装器目录执行：
 
 ```powershell
 node install.mjs --uninstall
 ```
 
-Userscript 与 macOS 的说明随对应安装包提供。完整兼容范围见 [MULTIPLATFORM.md](MULTIPLATFORM.md)。
+**macOS：** 使用 `LinearCN-*-macOS.zip` 中的浏览器扩展或 Userscript，具体步骤见包内说明。
 
 ## 许可证
 

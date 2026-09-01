@@ -61,5 +61,9 @@ for (const file of [
   assert.ok(fs.readFileSync(path.join(root, file), "utf8").startsWith("/**"), `${file} needs a boundary comment`);
 }
 
+const runtimeSource = fs.readFileSync(path.join(root, "js", "content.js"), "utf8");
+assert.match(runtimeSource, /queueMicrotask/, "runtime scheduling must work in background windows");
+assert.doesNotMatch(runtimeSource, /requestAnimationFrame\(flush\)/, "background translation cannot depend on animation frames");
+
 execFileSync(process.execPath, [path.join(root, "scripts", "sync-github-labels.mjs"), "--check"], { stdio: "inherit" });
 console.log("repository structure tests passed");

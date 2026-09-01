@@ -17,6 +17,8 @@ const runtimeJs = [
   "translations-base.js",
   "translations-enhanced.js",
   "translations-settings.js",
+  "translations-settings-nested.js",
+  "translations-integrations.js",
   "translations-quality.js",
   "content.js"
 ];
@@ -56,7 +58,7 @@ copyRuntime(chromiumDir, manifest);
 const firefoxManifest = structuredClone(manifest);
 firefoxManifest.browser_specific_settings = {
   gecko: {
-    id: "@linearcn-enhanced-community",
+    id: "@linearcn-community",
     strict_min_version: "128.0",
     data_collection_permissions: { required: ["none"] }
   },
@@ -69,8 +71,8 @@ const userscriptDir = path.join(distRoot, "userscript");
 ensure(userscriptDir);
 const userscriptHeader = [
   "// ==UserScript==",
-  "// @name         LinearCN Enhanced",
-  "// @namespace    linearcn-enhanced-community",
+  "// @name         LinearCN",
+  "// @namespace    linearcn-community",
   `// @version      ${version}`,
   "// @description  面向新版 Linear 的增强简体中文本地化",
   "// @match        https://linear.app/*",
@@ -82,7 +84,7 @@ const userscriptHeader = [
   ""
 ].join("\n");
 const userscriptBody = runtimeJs.map(file => fs.readFileSync(path.join(root, "js", file), "utf8")).join("\n\n");
-fs.writeFileSync(path.join(userscriptDir, "LinearCN-Enhanced.user.js"), userscriptHeader + userscriptBody, "utf8");
+fs.writeFileSync(path.join(userscriptDir, "LinearCN.user.js"), userscriptHeader + userscriptBody, "utf8");
 
 const windowsDir = path.join(distRoot, "windows-desktop");
 ensure(windowsDir);
@@ -103,7 +105,7 @@ const safariManifestPath = path.join(macosDir, "safari-webextension", "manifest.
 const safariManifest = JSON.parse(fs.readFileSync(safariManifestPath, "utf8"));
 safariManifest.browser_specific_settings = { safari: { strict_min_version: "14.0" } };
 fs.writeFileSync(safariManifestPath, JSON.stringify(safariManifest, null, 2) + "\n", "utf8");
-fs.copyFileSync(path.join(userscriptDir, "LinearCN-Enhanced.user.js"), path.join(macosDir, "LinearCN-Enhanced.user.js"));
+fs.copyFileSync(path.join(userscriptDir, "LinearCN.user.js"), path.join(macosDir, "LinearCN.user.js"));
 fs.copyFileSync(path.join(root, "platforms", "macos", "README-macOS.md"), path.join(macosDir, "README-macOS.md"));
 
 fs.copyFileSync(path.join(root, "MULTIPLATFORM.md"), path.join(distRoot, "COMPATIBILITY.md"));

@@ -11,7 +11,7 @@ const context = vm.createContext({
   requestAnimationFrame: callback => callback()
 });
 
-for (const file of ["translations-base.js", "translations-enhanced.js", "translations-settings.js", "translations-quality.js", "content.js"]) {
+for (const file of ["translations-base.js", "translations-enhanced.js", "translations-settings.js", "translations-settings-nested.js", "translations-integrations.js", "translations-quality.js", "content.js"]) {
   const source = fs.readFileSync(path.join(root, "js", file), "utf8");
   vm.runInContext(source, context, { filename: file });
 }
@@ -81,6 +81,20 @@ assert.equal(
 );
 assert.equal(translate("Copy from team"), "从团队复制");
 assert.equal(translate("Don’t copy"), "不复制");
+assert.equal(translate("Coding tools"), "编码工具");
+assert.equal(translate("Tools enabled here can be used to work on issues from the issue page."), "此处启用的工具可在议题页面中用于处理议题。");
+assert.equal(translate("Enable desktop notifications"), "启用桌面通知");
+assert.equal(translate("Auto-close parent issues"), "自动关闭父议题");
+assert.equal(translate("Cycle automation"), "周期自动化");
+assert.equal(translate("Workspace limit"), "工作区限额");
+assert.equal(translate("Let Linear Agent write code and open pull requests."), "让 Linear 智能体编写代码并创建拉取请求。");
+assert.equal(translate("A member has access to the workspace and can create and edit issues"), "成员可以访问工作区并创建和编辑议题");
+assert.equal(translate("Add @Codex to your issues"), "将 @Codex 添加到议题");
+assert.equal(translate("Analyze the issue contents and open a draft pull request"), "分析议题内容并创建草稿拉取请求");
+assert.equal(translate("Add new global MCP server"), "添加新的全局 MCP 服务器");
+assert.equal(translate("A summary of the current code"), "当前代码摘要");
+assert.equal(translate("7 loops"), "7 个循环任务");
+assert.equal(translate("Require explicit prioritization"), "要求明确设置优先级");
 assert.equal(translate("Continue with email"), "使用电子邮件继续");
 assert.equal(translate("What’s your email address?"), "您的电子邮件地址是什么？");
 assert.equal(translate("Enter your email address…"), "输入您的电子邮件地址……");

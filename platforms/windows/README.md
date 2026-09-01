@@ -1,4 +1,4 @@
-# LinearCN Enhanced Windows 桌面安装器
+# LinearCN Windows 桌面安装器
 
 仅支持 Linear Desktop 1.32.2。安装器不会携带或分发 Linear 官方程序，只在本机解包并修改现有 `app.asar`。
 

@@ -1,6 +1,6 @@
 # Attribution and modification notice
 
-LinearCN Enhanced is a modified and extended work based on LinearCN 1.2.0.
+LinearCN is a modified and extended work based on LinearCN 1.2.0.
 
 - Original project: LinearCN 1.2.0
 - Original author/publisher: Darwin

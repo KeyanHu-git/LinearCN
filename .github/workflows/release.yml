@@ -32,11 +32,11 @@ jobs:
         run: |
           VERSION=$(node -p "require('./manifest.json').version")
           mkdir -p release
-          (cd "dist/$VERSION/chromium" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-chromium.zip" .)
-          (cd "dist/$VERSION/firefox" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-firefox.zip" .)
-          (cd "dist/$VERSION/windows-desktop" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-windows-desktop-installer.zip" .)
-          (cd "dist/$VERSION/macos" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-macOS.zip" .)
-          cp "dist/$VERSION/userscript/LinearCN-Enhanced.user.js" "release/LinearCN-Enhanced-$VERSION.user.js"
+          (cd "dist/$VERSION/chromium" && zip -r "../../../release/LinearCN-$VERSION-chromium.zip" .)
+          (cd "dist/$VERSION/firefox" && zip -r "../../../release/LinearCN-$VERSION-firefox.zip" .)
+          (cd "dist/$VERSION/windows-desktop" && zip -r "../../../release/LinearCN-$VERSION-windows-desktop-installer.zip" .)
+          (cd "dist/$VERSION/macos" && zip -r "../../../release/LinearCN-$VERSION-macOS.zip" .)
+          cp "dist/$VERSION/userscript/LinearCN.user.js" "release/LinearCN-$VERSION.user.js"
           cp "dist/$VERSION/COMPATIBILITY.md" release/
 
       - name: Publish GitHub release
@@ -45,10 +45,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${GITHUB_REF_NAME}" release/* \
-            --title "LinearCN Enhanced ${GITHUB_REF_NAME}" \
+            --title "LinearCN ${GITHUB_REF_NAME}" \
             --generate-notes
 
       - uses: actions/upload-artifact@v4
         with:
-          name: LinearCN-Enhanced
+          name: LinearCN
           path: release/

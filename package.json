@@ -1,6 +1,6 @@
 {
-  "name": "linearcn-enhanced",
-  "version": "1.5.4",
+  "name": "linearcn",
+  "version": "1.0.0",
   "private": true,
   "license": "GPL-3.0-only",
   "scripts": {

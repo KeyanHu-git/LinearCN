@@ -1,4 +1,4 @@
-# LinearCN Enhanced for macOS
+# LinearCN for macOS
 
 本包面向 macOS Web 端，不修改已签名的官方 `Linear.app`。
 
@@ -25,7 +25,7 @@ Safari 17 及以后：
 1. 打开 Safari → 设置 → 高级，启用“显示 Web 开发者功能”。
 2. 打开 Safari → 设置 → 开发者，允许未签名扩展。
 3. 点击“添加临时扩展”，选择 `safari-webextension` 文件夹或其 ZIP。
-4. 在扩展页启用 LinearCN Enhanced，并允许访问 `linear.app`。
+4. 在扩展页启用 LinearCN，并允许访问 `linear.app`。
 
 Safari 会在退出浏览器或 24 小时后移除临时扩展。
 
@@ -41,7 +41,7 @@ xcrun safari-web-extension-converter safari-webextension
 
 ### 5. Userscript
 
-如果浏览器装有兼容的用户脚本管理器，可直接导入 `LinearCN-Enhanced.user.js`。
+如果浏览器装有兼容的用户脚本管理器，可直接导入 `LinearCN.user.js`。
 
 ## 原生 Linear.app
 
