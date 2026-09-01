@@ -213,7 +213,7 @@
   globalThis.LinearCNEngine = {
     translateString,
     getStats: () => ({ ...stats }),
-    version: "1.5.1"
+    version: "1.5.2"
   };
 
   if (typeof document !== "undefined") {

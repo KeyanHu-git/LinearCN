@@ -68,6 +68,18 @@ assert.equal(translate("Enable MCP connectors"), "启用 MCP 连接器");
 assert.equal(translate("Allowed MCP connectors"), "允许使用的 MCP 连接器");
 assert.equal(translate("Workspace guidance"), "工作区指导");
 assert.equal(translate("Optional agent guidance..."), "可选的智能体指导…");
+assert.equal(translate("Team access"), "团队访问权限");
+assert.equal(
+  translate("Control who can access the team and its content. Private teams are visible only to team members and workspace admins."),
+  "控制谁可以访问此团队及其内容。私有团队仅对团队成员和工作区管理员可见。"
+);
+assert.equal(translate("Used for team schedules, dates, and cycle start times"), "用于团队日程、日期和周期开始时间");
+assert.equal(
+  translate("Copy workflows, cycle, and team settings from another team. Team members and Slack notification settings won't be copied."),
+  "从其他团队复制工作流、周期和团队设置。不会复制团队成员和 Slack 通知设置。"
+);
+assert.equal(translate("Copy from team"), "从团队复制");
+assert.equal(translate("Don’t copy"), "不复制");
 assert.equal(translate("Continue with email"), "使用电子邮件继续");
 assert.equal(translate("What’s your email address?"), "您的电子邮件地址是什么？");
 assert.equal(translate("Enter your email address…"), "输入您的电子邮件地址……");
