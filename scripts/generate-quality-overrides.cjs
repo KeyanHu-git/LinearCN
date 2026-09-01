@@ -1,3 +1,9 @@
+/**
+ * Generator for the final terminology and semantic correction layer.
+ *
+ * Heuristics handle broad consistency; explicit entries encode reviewed
+ * exceptions. Edit this source and regenerate instead of editing its output.
+ */
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");

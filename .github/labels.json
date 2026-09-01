@@ -1,0 +1,31 @@
+[
+  { "name": "type:translation", "color": "5319E7", "description": "新增、补充或修正界面翻译" },
+  { "name": "type:bug", "color": "D73A4A", "description": "运行行为与预期不一致", "aliases": ["bug"] },
+  { "name": "type:enhancement", "color": "1D76DB", "description": "改进现有能力或增加新能力", "aliases": ["enhancement"] },
+  { "name": "type:documentation", "color": "0075CA", "description": "文档、示例或说明需要调整", "aliases": ["documentation"] },
+  { "name": "type:maintenance", "color": "6A737D", "description": "依赖、构建、重构或仓库维护" },
+
+  { "name": "area:dictionary", "color": "C5DEF5", "description": "词表、术语或质量覆盖层" },
+  { "name": "area:engine", "color": "C5DEF5", "description": "DOM 翻译引擎与内容保护" },
+  { "name": "area:browser", "color": "C5DEF5", "description": "Chromium、Firefox 或 Userscript" },
+  { "name": "area:windows", "color": "C5DEF5", "description": "Windows 桌面安装器与 Electron 适配" },
+  { "name": "area:macos", "color": "C5DEF5", "description": "macOS 浏览器方案与兼容性" },
+  { "name": "area:release", "color": "C5DEF5", "description": "构建、打包与 GitHub Release" },
+  { "name": "area:repository", "color": "C5DEF5", "description": "仓库结构、自动化与贡献流程" },
+
+  { "name": "status:needs-triage", "color": "FBCA04", "description": "等待确认范围、复现条件和负责人" },
+  { "name": "status:needs-context", "color": "D4C5F9", "description": "缺少页面、原文、截图或环境信息", "aliases": ["question"] },
+  { "name": "status:ready", "color": "0E8A16", "description": "信息完整，可以开始处理" },
+  { "name": "status:blocked", "color": "B60205", "description": "受外部条件或上游变化阻塞" },
+  { "name": "status:duplicate", "color": "CFD3D7", "description": "已有相同问题或需求", "aliases": ["duplicate"] },
+  { "name": "status:invalid", "color": "E4E669", "description": "不属于项目问题或无法成立", "aliases": ["invalid"] },
+  { "name": "status:wont-fix", "color": "FFFFFF", "description": "经评估不计划处理", "aliases": ["wontfix"] },
+
+  { "name": "priority:p0", "color": "B60205", "description": "阻断使用或存在严重数据风险" },
+  { "name": "priority:p1", "color": "D93F0B", "description": "影响主要路径，应优先处理" },
+  { "name": "priority:p2", "color": "FBCA04", "description": "常规优先级" },
+  { "name": "priority:p3", "color": "C2E0C6", "description": "低频场景或可延后改进" },
+
+  { "name": "community:good-first-issue", "color": "7057FF", "description": "范围清晰，适合首次贡献", "aliases": ["good first issue"] },
+  { "name": "community:help-wanted", "color": "008672", "description": "欢迎社区协助实现或验证", "aliases": ["help wanted"] }
+]

@@ -1,7 +1,7 @@
 name: 错译报告
 description: 报告语义错误或术语不一致
 title: "[错译] "
-labels: ["translation", "quality"]
+labels: ["type:translation", "area:dictionary", "status:needs-triage"]
 body:
   - type: textarea
     id: source

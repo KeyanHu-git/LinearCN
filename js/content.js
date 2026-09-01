@@ -1,3 +1,10 @@
+/**
+ * Browser runtime boundary.
+ *
+ * Inputs are preloaded translation layers; output is display-only DOM changes.
+ * Keep this module platform-neutral, network-free, and conservative around user
+ * content. Layer order is part of the public maintenance contract.
+ */
 (() => {
   "use strict";
 

@@ -1,3 +1,9 @@
+/**
+ * Read-only collector for rendered English candidates in Linear settings.
+ *
+ * It navigates an explicitly debuggable local session, excludes protected user
+ * content, and writes evidence for review. It does not change Linear data.
+ */
 import fs from "node:fs";
 import path from "node:path";
 

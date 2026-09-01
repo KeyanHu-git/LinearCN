@@ -1,0 +1,47 @@
+name: 功能故障
+description: 报告翻译引擎、安装器或平台包的运行问题
+title: "[故障] "
+labels: ["type:bug", "status:needs-triage"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options:
+        - 翻译引擎
+        - Chromium / Firefox
+        - Userscript
+        - Windows 桌面端
+        - macOS 方案
+        - 构建或发布
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 实际表现
+      description: 说明发生了什么，以及预期结果。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开……
+        2. 进入……
+        3. 观察到……
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: 版本
+      placeholder: Linear 版本、LinearCN 版本、浏览器或系统版本
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 截图或日志
+      description: 请先删除账号、令牌、工作区数据和其他敏感信息。

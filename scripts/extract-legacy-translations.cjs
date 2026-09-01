@@ -1,3 +1,9 @@
+/**
+ * Migration tool from the preserved legacy snapshot to the base dictionary.
+ *
+ * Marker and duplicate checks deliberately fail closed so upstream format drift
+ * cannot produce a plausible but incomplete compatibility layer.
+ */
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");

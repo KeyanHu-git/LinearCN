@@ -1,3 +1,8 @@
+/**
+ * Controlled version migration for an already patched desktop loader.
+ * Only known historical markers are accepted; ambiguous or missing markers are
+ * errors because guessing here can make Linear unbootable.
+ */
 const fs = require("node:fs");
 
 const file = process.argv[2];

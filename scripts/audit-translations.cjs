@@ -1,3 +1,9 @@
+/**
+ * Read-only semantic audit for the effective translation map.
+ *
+ * The report surfaces conflicts and review candidates; it never rewrites a
+ * dictionary. Threshold changes must describe a quality policy, not hide debt.
+ */
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");

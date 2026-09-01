@@ -1,3 +1,10 @@
+/**
+ * Fail-closed Windows desktop installer.
+ *
+ * The installer validates the Linear version and one exact patch point, creates
+ * a non-overwriting backup, records hashes, and keeps rollback state beside the
+ * installed runtime. It never distributes Linear application code.
+ */
 import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";

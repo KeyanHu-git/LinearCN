@@ -1,3 +1,10 @@
+/**
+ * Read-only snapshot of the legacy single-file implementation.
+ *
+ * This file is extraction input and provenance evidence. It is not loaded by
+ * the extension manifest; maintained translations and runtime changes belong in
+ * the layered files documented in js/README.md.
+ */
 const allData = [
   [`Deleted projects are available in the "Recently deleted" view for 30 days, before they are permanently deleted.`, `删除的项目在"最近删除"视图中可用30天，在永久删除之前。`],
   [`Project milestone`, `项目里程碑`],

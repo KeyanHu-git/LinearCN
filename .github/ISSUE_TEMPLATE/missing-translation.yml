@@ -1,7 +1,7 @@
 name: 漏译报告
 description: 报告未被汉化的 Linear 页面或弹层
 title: "[漏译] "
-labels: ["translation", "missing"]
+labels: ["type:translation", "area:dictionary", "status:needs-triage"]
 body:
   - type: input
     id: path

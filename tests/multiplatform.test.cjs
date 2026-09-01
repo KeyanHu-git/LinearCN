@@ -1,3 +1,4 @@
+/** Contract tests for the versioned packages produced in dist/. */
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -8,6 +9,7 @@ const dist = path.join(root, "dist", sourceManifest.version);
 const chromium = JSON.parse(fs.readFileSync(path.join(dist, "chromium", "manifest.json"), "utf8"));
 const firefox = JSON.parse(fs.readFileSync(path.join(dist, "firefox", "manifest.json"), "utf8"));
 const userscript = fs.readFileSync(path.join(dist, "userscript", "LinearCN-Enhanced.user.js"), "utf8");
+const packagedDocs = ["LICENSE", "README.md", "ARCHITECTURE.md", "CONTRIBUTING.md", "MULTIPLATFORM.md", "NOTICE.md", "PRIVACY.md"];
 
 assert.equal(chromium.manifest_version, 3);
 assert.equal(chromium.version, sourceManifest.version);
@@ -19,6 +21,7 @@ assert.match(userscript, /@match\s+https:\/\/linear\.app\/\*/);
 assert.match(userscript, /LinearCNQualityEntries/);
 assert.doesNotMatch(userscript, /fetch\s*\(/);
 assert.doesNotMatch(userscript, /XMLHttpRequest|WebSocket|eval\s*\(/);
+for (const file of packagedDocs) assert.ok(fs.existsSync(path.join(dist, "chromium", file)), `missing packaged document: ${file}`);
 assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "extension", "js", "agent-fallback.js")));
 assert.ok(fs.existsSync(path.join(dist, "macos", "safari-webextension", "manifest.json")));
 assert.ok(fs.existsSync(path.join(dist, "macos", "LinearCN-Enhanced.user.js")));

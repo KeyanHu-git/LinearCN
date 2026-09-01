@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安装与兼容性说明
+    url: https://github.com/KeyanHu-git/LinearCN/blob/main/MULTIPLATFORM.md
+    about: 提交 Issue 前先确认当前平台与版本是否受支持。

@@ -1,3 +1,9 @@
+/**
+ * Deterministic packager for all supported delivery shells.
+ *
+ * Runtime files are copied from the shared core. Refusing an existing versioned
+ * output prevents a stale package from being silently mixed into a release.
+ */
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -24,7 +30,17 @@ function copyRuntime(destination, targetManifest, includeAgentFallback = false) 
   ensure(path.join(destination, "img"));
   ensure(path.join(destination, "js"));
   fs.writeFileSync(path.join(destination, "manifest.json"), JSON.stringify(targetManifest, null, 2) + "\n", "utf8");
-  for (const file of ["LICENSE", "README.md"]) fs.copyFileSync(path.join(root, file), path.join(destination, file));
+  for (const file of [
+    "LICENSE",
+    "README.md",
+    "ARCHITECTURE.md",
+    "CONTRIBUTING.md",
+    "MULTIPLATFORM.md",
+    "NOTICE.md",
+    "PRIVACY.md"
+  ]) {
+    fs.copyFileSync(path.join(root, file), path.join(destination, file));
+  }
   for (const file of fs.readdirSync(path.join(root, "img"))) {
     fs.copyFileSync(path.join(root, "img", file), path.join(destination, "img", file));
   }

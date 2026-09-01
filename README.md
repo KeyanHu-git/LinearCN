@@ -90,6 +90,8 @@ npm run test:packages
 
 发现漏译或错译时，请附上页面位置、英文原文和截图。提交代码前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
+项目分层、依赖边界和文件职责见 [ARCHITECTURE.md](ARCHITECTURE.md)。
+
 ## 许可证
 
 LinearCN 采用 [GNU GPLv3](LICENSE) 发布。完整许可与版权信息见 [NOTICE.md](NOTICE.md)。

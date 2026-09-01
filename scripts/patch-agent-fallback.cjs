@@ -1,3 +1,8 @@
+/**
+ * One-time migration for desktop loaders created before Agent fallback existed.
+ * The exact marker and unique patch point make repeat execution idempotent and
+ * unknown desktop builds fail closed.
+ */
 const fs = require("node:fs");
 
 const file = process.argv[2];

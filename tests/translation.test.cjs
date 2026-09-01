@@ -1,3 +1,4 @@
+/** Semantic regression tests for dictionary precedence and runtime matching. */
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
