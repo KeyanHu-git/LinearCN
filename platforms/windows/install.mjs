@@ -12,7 +12,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createPackage, extractAll } from "@electron/asar";
 
-const VERSION = "1.5.3";
+const VERSION = "1.5.4";
 const SUPPORTED_LINEAR_VERSION = "1.32.2";
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -70,10 +70,10 @@ function patchMain(source) {
   const loader = [
     "if(!await UO()){",
     "try{let e=r.session.defaultSession,n=e.extensions?.loadExtension?e.extensions.loadExtension.bind(e.extensions):e.loadExtension.bind(e);",
-    "await n(t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.5.3`)),",
-    "X.info(`LinearCN Enhanced 1.5.3 loaded`,{logToDisk:!0})}",
+    "await n(t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.5.4`)),",
+    "X.info(`LinearCN Enhanced 1.5.4 loaded`,{logToDisk:!0})}",
     "catch(e){X.error(`Failed to load LinearCN extension`,e,void 0,{logToDisk:!0})}",
-    "try{let e=t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.5.3`,`js`,`agent-fallback.js`),",
+    "try{let e=t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.5.4`,`js`,`agent-fallback.js`),",
     "n=c.readFileSync(e,`utf8`),i=e=>{let t=()=>{e.isDestroyed()||e.executeJavaScript(n,!0).catch(e=>X.warn(`LinearCN fallback injection failed`,e))};",
     "e.on(`dom-ready`,t),e.on(`did-navigate-in-page`,t),e.getURL()&&setTimeout(t,0)};",
     "r.app.on(`web-contents-created`,(e,t)=>i(t)),r.webContents.getAllWebContents().forEach(i),",
