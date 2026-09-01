@@ -8,8 +8,6 @@
 
 <p align="center">
   <a href="https://github.com/KeyanHu-git/LinearCN/releases/latest"><strong>下载最新版</strong></a>
-  · <a href="https://github.com/KeyanHu-git/LinearCN/issues">反馈漏译</a>
-  · <a href="CONTRIBUTING.md">参与校对</a>
 </p>
 
 <p align="center">
@@ -17,9 +15,6 @@
   <a href="LICENSE"><img alt="GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue"></a>
   <img alt="No telemetry" src="https://img.shields.io/badge/telemetry-none-brightgreen">
 </p>
-
-> [!IMPORTANT]
-> LinearCN 是非官方社区项目，与 Linear Orbit, Inc. 无隶属或合作关系。
 
 ## Linear 的中文界面
 
@@ -42,9 +37,7 @@ LinearCN 不是整页机器翻译器。它使用人工维护的词表和轻量 D
 | AI 与智能体 | Linear Agent、智能体个性化、MCP、工作区指导 |
 | 连接与扩展 | 集成、API、OAuth、应用目录与帮助菜单 |
 
-Linear 更新很快，个别新页面仍可能出现英文。发现后可以直接提交[漏译报告](https://github.com/KeyanHu-git/LinearCN/issues/new?template=missing-translation.yml)。
-
-## 下载哪个文件
+## 下载文件
 
 | 文件 | 用途 |
 | --- | --- |
@@ -95,50 +88,6 @@ node install.mjs --uninstall
 ```
 
 Userscript 与 macOS 的说明随对应安装包提供。完整兼容范围见 [MULTIPLATFORM.md](MULTIPLATFORM.md)。
-
-## 它怎样工作
-
-```text
-兼容词表 + 当前词表 + 设置词表 + 质量覆盖层
-                    ↓
-        精确匹配 / 空白归一化 / 动态规则
-                    ↓
-          MutationObserver 增量更新
-                    ↓
-          浏览器扩展 / Userscript / 桌面端
-```
-
-运行时完全由 JavaScript 组成，不需要 Python，也不连接在线翻译服务。词表层、DOM 引擎、平台适配和构建工具相互独立，详细设计见 [ARCHITECTURE.md](ARCHITECTURE.md)。
-
-## 隐私
-
-LinearCN 没有遥测、广告、远程代码或网络请求。翻译在本机完成。详见 [PRIVACY.md](PRIVACY.md)。
-
-翻译引擎会主动跳过输入框、编辑器、代码块、议题标题、项目名称和评论。Windows 安装器只修改本机已有的 Linear，并在写入前创建可恢复备份。
-
-## 开发
-
-需要 Node.js 22 或更高版本：
-
-```bash
-npm run generate
-npm test
-npm run audit
-npm run build
-npm run test:packages
-```
-
-发现漏译或错译时，请附上页面位置、英文原文和截图。提交代码前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-项目分层、依赖边界和文件职责见 [ARCHITECTURE.md](ARCHITECTURE.md)。目录说明、注释规则和标签规范都已纳入自动测试。
-
-## 参与维护
-
-- 漏译：提供页面入口、英文原文、平台和截图。
-- 错译：同时提供当前译文、建议译文和具体语境。
-- 代码变更：先确认应修改的词表层，再运行生成、测试、审计和构建。
-
-完整流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 许可证
 
