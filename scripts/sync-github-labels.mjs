@@ -80,7 +80,12 @@ for (const definition of definitions) {
   });
 
   if (!current) {
-    await request(`${apiRoot}/labels`, { method: "POST", body: payload, headers: { "Content-Type": "application/json" } });
+    const createPayload = JSON.stringify({
+      name: definition.name,
+      color: definition.color.toLowerCase(),
+      description: definition.description
+    });
+    await request(`${apiRoot}/labels`, { method: "POST", body: createPayload, headers: { "Content-Type": "application/json" } });
     summary.created.push(definition.name);
     continue;
   }
