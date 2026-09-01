@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate and test
+        run: |
+          npm run generate
+          npm test
+          npm run audit
+          npm run build
+          npm run test:packages
+
+      - name: Package release files
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          mkdir -p release
+          (cd "dist/$VERSION/chromium" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-chromium.zip" .)
+          (cd "dist/$VERSION/firefox" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-firefox.zip" .)
+          (cd "dist/$VERSION/windows-desktop" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-windows-desktop-installer.zip" .)
+          (cd "dist/$VERSION/macos" && zip -r "../../../release/LinearCN-Enhanced-$VERSION-macOS.zip" .)
+          cp "dist/$VERSION/userscript/LinearCN-Enhanced.user.js" "release/LinearCN-Enhanced-$VERSION.user.js"
+          cp "dist/$VERSION/COMPATIBILITY.md" release/
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" release/* \
+            --title "LinearCN Enhanced ${GITHUB_REF_NAME}" \
+            --generate-notes
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LinearCN-Enhanced
+          path: release/

@@ -1,0 +1,12 @@
+dist/
+audits/
+node_modules/
+*.log
+*.tmp
+*.bak
+*.asar
+*.crx
+*.pem
+install-state.json
+.DS_Store
+Thumbs.db

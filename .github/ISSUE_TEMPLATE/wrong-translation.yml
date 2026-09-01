@@ -1,0 +1,23 @@
+name: 错译报告
+description: 报告语义错误或术语不一致
+title: "[错译] "
+labels: ["translation", "quality"]
+body:
+  - type: textarea
+    id: source
+    attributes:
+      label: 英文原文
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 当前译文
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议译文及理由
+    validations:
+      required: true
