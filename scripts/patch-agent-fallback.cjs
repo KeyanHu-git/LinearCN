@@ -14,7 +14,7 @@ const needle = "catch(e){X.error(`Failed to load LinearCN extension`,e,void 0,{l
 const injection = [
   "catch(e){X.error(`Failed to load LinearCN extension`,e,void 0,{logToDisk:!0})}",
   "try{",
-  "let e=t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.5.0`,`js`,`agent-fallback.js`),",
+  "let e=t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.5.1`,`js`,`agent-fallback.js`),",
   "n=c.readFileSync(e,`utf8`),",
   "i=e=>{",
   "let t=()=>{e.isDestroyed()||e.executeJavaScript(n,!0).catch(e=>X.warn(`LinearCN Agent fallback injection failed`,e))};",

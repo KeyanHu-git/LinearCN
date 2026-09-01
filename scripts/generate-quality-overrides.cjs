@@ -17,7 +17,7 @@ const effective = new Map([
 const overrides = new Map();
 for (const [source, target] of effective) {
   let corrected = target;
-  if (/\bissues?\b/i.test(source) && !/security issues?|problem issues?/i.test(source)) {
+  if (/\bissues?\b/i.test(source) && !/security issues?|problem issues?|\bquestions?\b|\bproblems?\b/i.test(source)) {
     corrected = corrected.replace(/问题/g, "议题");
   }
   corrected = corrected.replace(/你(?!们)/g, "您");

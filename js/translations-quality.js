@@ -218,10 +218,6 @@ globalThis.LinearCNQualityEntries = [
     "您的 Linear 智能体个人设置"
   ],
   [
-    "Create issues and answer questions about your workspace.",
-    "创建议题并回答有关工作区的议题。"
-  ],
-  [
     "AI agents can work alongside you as teammates.",
     "AI 智能体可以像队友一样与您协作。"
   ],

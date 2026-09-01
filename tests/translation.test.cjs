@@ -50,6 +50,24 @@ assert.equal(translate("Keyboard shortcuts"), "键盘快捷键");
 assert.equal(translate("Download apps"), "下载应用");
 assert.equal(translate("What’s new"), "最新动态");
 assert.equal(translate("Log in to Linear"), "登录 Linear");
+assert.equal(
+  translate("Create issues and answer questions about your workspace"),
+  "创建议题并回答有关工作区的问题"
+);
+assert.equal(translate("Enable Linear Agent"), "启用 Linear 智能体");
+assert.equal(
+  translate("Allow conversations with Linear Agent inside your workspace"),
+  "允许在工作区内与 Linear 智能体对话"
+);
+assert.equal(
+  translate("Allow Linear Agent to use MCP connectors added by workspace members"),
+  "允许 Linear 智能体使用工作区成员添加的 MCP 连接器"
+);
+assert.equal(translate(". Add personal MCP connectors in"), "。如需添加个人 MCP 连接器，请前往");
+assert.equal(translate("Enable MCP connectors"), "启用 MCP 连接器");
+assert.equal(translate("Allowed MCP connectors"), "允许使用的 MCP 连接器");
+assert.equal(translate("Workspace guidance"), "工作区指导");
+assert.equal(translate("Optional agent guidance..."), "可选的智能体指导…");
 assert.equal(translate("Continue with email"), "使用电子邮件继续");
 assert.equal(translate("What’s your email address?"), "您的电子邮件地址是什么？");
 assert.equal(translate("Enter your email address…"), "输入您的电子邮件地址……");
