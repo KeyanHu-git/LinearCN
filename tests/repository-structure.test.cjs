@@ -5,11 +5,13 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const firstLevelDirectories = [".github", "img", "js", "platforms", "scripts", "tests"];
+const firstLevelDirectories = ["img", "js", "platforms", "scripts", "tests"];
 
 for (const directory of firstLevelDirectories) {
   assert.ok(fs.existsSync(path.join(root, directory, "README.md")), `${directory}/README.md is required`);
 }
+assert.ok(fs.existsSync(path.join(root, ".github", "AUTOMATION.md")), ".github/AUTOMATION.md is required");
+assert.ok(!fs.existsSync(path.join(root, ".github", "README.md")), ".github/README.md would override the repository homepage");
 
 const allowedDeepReadmes = new Set(["platforms/windows/README.md"]);
 function collectReadmes(directory, relative = "") {
@@ -30,7 +32,7 @@ for (const readme of collectReadmes(root)) {
 }
 
 const architecture = fs.readFileSync(path.join(root, "ARCHITECTURE.md"), "utf8");
-for (const directory of firstLevelDirectories) {
+for (const directory of [".github", ...firstLevelDirectories]) {
   assert.ok(architecture.includes(`\`${directory}/\``), `ARCHITECTURE.md must describe ${directory}/`);
 }
 
