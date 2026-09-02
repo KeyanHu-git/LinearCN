@@ -21,9 +21,7 @@
   ];
   const translations = new Map([...baseEntries, ...enhancedEntries, ...settingsEntries, ...nestedSettingsEntries, ...integrationEntries, ...qualityEntries]);
   const normalizedTranslations = new Map();
-  const enqueue = typeof queueMicrotask === "function"
-    ? queueMicrotask
-    : callback => Promise.resolve().then(callback);
+  const enqueue = callback => setTimeout(callback, 16);
   const translatedAttributes = ["aria-label", "aria-placeholder", "data-empty-text", "data-label", "placeholder", "title", "alt"];
   const protectedSelector = [
     "input",
@@ -185,7 +183,19 @@
     scheduled = false;
     const nodes = [...pending];
     pending.clear();
-    for (const node of nodes) translateSubtree(node);
+    const batch = new Set(nodes);
+    for (const node of nodes) {
+      let parent = node.parentNode;
+      let coveredByAncestor = false;
+      while (parent) {
+        if (batch.has(parent)) {
+          coveredByAncestor = true;
+          break;
+        }
+        parent = parent.parentNode;
+      }
+      if (!coveredByAncestor) translateSubtree(node);
+    }
     translateDocumentTitle();
   }
 

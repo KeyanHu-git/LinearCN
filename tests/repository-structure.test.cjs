@@ -62,7 +62,8 @@ for (const file of [
 }
 
 const runtimeSource = fs.readFileSync(path.join(root, "js", "content.js"), "utf8");
-assert.match(runtimeSource, /queueMicrotask/, "runtime scheduling must work in background windows");
+assert.match(runtimeSource, /setTimeout\(callback, 16\)/, "runtime scheduling must yield to the renderer");
+assert.doesNotMatch(runtimeSource, /queueMicrotask/, "runtime scheduling cannot monopolize the microtask queue");
 assert.doesNotMatch(runtimeSource, /requestAnimationFrame\(flush\)/, "background translation cannot depend on animation frames");
 
 execFileSync(process.execPath, [path.join(root, "scripts", "sync-github-labels.mjs"), "--check"], { stdio: "inherit" });
