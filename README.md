@@ -4,7 +4,7 @@
 
 <h1 align="center">LinearCN</h1>
 
-<p align="center">让 Linear 更完整、更准确地显示为简体中文。</p>
+<p align="center">持续维护的 Linear 汉化版，解决现有版本年久欠修的问题。</p>
 
 <p align="center">
   <a href="https://github.com/KeyanHu-git/LinearCN/releases/latest"><strong>下载最新版</strong></a>
