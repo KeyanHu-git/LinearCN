@@ -15,6 +15,12 @@
   <a href="LICENSE"><img alt="GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue"></a>
 </p>
 
+## 简介
+
+LinearCN 持续跟进 Linear 的界面更新，重点修复旧汉化在新版设置、AI 与智能体、集成详情和桌面端中的漏译与错译。
+
+项目采用人工校对词表，并将同一套翻译同步到浏览器扩展、Userscript 和 Windows 桌面端。
+
 ## 支持平台
 
 | 平台 | 使用方式 |
@@ -29,15 +35,15 @@
 
 ## 安装
 
-**Chrome / Edge：** 解压 Chromium 安装包，在扩展管理页选择“加载已解压的扩展”。
+**Chrome / Edge：** 解压 Chromium 安装包，在扩展管理页开启开发者模式并加载文件夹。
 
 **Firefox：** 解压 Firefox 安装包，在 `about:debugging` 中载入 `manifest.json`。
 
-**Userscript：** 将 `.user.js` 文件导入用户脚本管理器。
+**Userscript：** 将 `.user.js` 文件导入 Tampermonkey 等用户脚本管理器。
 
-**Windows 桌面端：** 完全退出 Linear，解压安装包，双击 `install.cmd`。
+**Windows 桌面端：** 退出 Linear，解压安装包并双击 `install.cmd`。
 
-**macOS：** 解压 macOS 安装包，按包内说明安装。
+**macOS：** 解压 macOS 安装包，选择浏览器扩展或 Userscript。
 
 ## 许可证
 
