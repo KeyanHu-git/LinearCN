@@ -23,6 +23,8 @@ assert.doesNotMatch(userscript, /fetch\s*\(/);
 assert.doesNotMatch(userscript, /XMLHttpRequest|WebSocket|eval\s*\(/);
 for (const file of packagedDocs) assert.ok(fs.existsSync(path.join(dist, "chromium", file)), `missing packaged document: ${file}`);
 assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "extension", "js", "agent-fallback.js")));
+assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "install.cmd")));
+assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "uninstall.cmd")));
 assert.ok(fs.existsSync(path.join(dist, "macos", "safari-webextension", "manifest.json")));
 assert.ok(fs.existsSync(path.join(dist, "macos", "LinearCN.user.js")));
 

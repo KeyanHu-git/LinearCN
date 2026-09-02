@@ -37,7 +37,8 @@ function findAppAsar(explicitPath) {
   const candidates = [
     process.env.LOCALAPPDATA && path.join(process.env.LOCALAPPDATA, "Programs", "Linear", "resources", "app.asar"),
     process.env.LOCALAPPDATA && path.join(process.env.LOCALAPPDATA, "Linear", "resources", "app.asar"),
-    process.env.ProgramFiles && path.join(process.env.ProgramFiles, "Linear", "resources", "app.asar")
+    process.env.ProgramFiles && path.join(process.env.ProgramFiles, "Linear", "resources", "app.asar"),
+    ...["C", "D", "E", "F", "G"].map(drive => `${drive}:\\Linear\\resources\\app.asar`)
   ].filter(Boolean).filter(candidate => fs.existsSync(candidate));
   const unique = [...new Set(candidates.map(candidate => path.resolve(candidate)))];
   if (unique.length !== 1) {

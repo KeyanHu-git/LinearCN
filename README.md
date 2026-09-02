@@ -29,20 +29,15 @@
 
 ## 安装
 
-**Chrome / Edge：** 下载并解压 `LinearCN-*-chromium.zip`，打开 `chrome://extensions` 或 `edge://extensions`，开启开发者模式，选择“加载已解压的扩展”，然后刷新 Linear。
+**Chrome / Edge：** 解压 Chromium 安装包，在扩展管理页选择“加载已解压的扩展”。
 
-**Firefox：** 下载并解压 `LinearCN-*-firefox.zip`，在 `about:debugging#/runtime/this-firefox` 中选择“临时载入附加组件”，打开 `manifest.json`。
+**Firefox：** 解压 Firefox 安装包，在 `about:debugging` 中载入 `manifest.json`。
 
-**Userscript：** 将 `LinearCN-*.user.js` 导入 Tampermonkey 等用户脚本管理器，然后刷新 Linear。
+**Userscript：** 将 `.user.js` 文件导入用户脚本管理器。
 
-**Windows 桌面端：** 当前支持 Linear Desktop 1.32.2。完全退出 Linear，在解压后的安装器目录执行：
+**Windows 桌面端：** 完全退出 Linear，解压安装包，双击 `install.cmd`。
 
-```powershell
-npm install
-node install.mjs --app-asar "C:\path\to\Linear\resources\app.asar"
-```
-
-**macOS：** 使用 `LinearCN-*-macOS.zip` 中的浏览器扩展或 Userscript，具体步骤见包内说明。
+**macOS：** 解压 macOS 安装包，按包内说明安装。
 
 ## 许可证
 
