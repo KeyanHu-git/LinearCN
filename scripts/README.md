@@ -10,6 +10,7 @@
 | `crawl-settings-untranslated.mjs` | 从可调试 Linear 会话采集设置页候选文本 | audit |
 | `analyze-crawl-report.cjs` | 使用当前翻译引擎过滤采集结果并生成缺失候选 | audit |
 | `build-multiplatform.cjs` | 组装 Chromium、Firefox、Userscript、Windows 与 macOS 包 | build |
+| `prepare-package-test.cjs` | 仅重建当前版本的 `dist` 产物并运行包测试前置流程 | test |
 | `patch-linear-loader-version.cjs` | 将受控桌面加载点升级到当前版本 | maintenance |
 | `patch-agent-fallback.cjs` | 为旧桌面补丁增加独立 WebContents 兜底 | maintenance |
 | `sync-github-labels.mjs` | 校验并同步仓库标签分类 | maintenance |
@@ -20,4 +21,4 @@
 generate -> test -> audit -> build -> package test
 ```
 
-生成脚本可以写入声明的产物；审计脚本只写报告；构建脚本只写 `dist/`；维护脚本必须显式接收目标或使用 GitHub Actions 提供的仓库环境。
+生成脚本可以写入声明的产物；审计脚本只写报告；构建脚本只写 `dist/`；测试前置脚本只能替换当前 `manifest.version` 对应的版本化产物；维护脚本必须显式接收目标或使用 GitHub Actions 提供的仓库环境。

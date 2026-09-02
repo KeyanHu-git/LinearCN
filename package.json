@@ -9,6 +9,7 @@
     "labels:check": "node scripts/sync-github-labels.mjs --check",
     "audit": "node scripts/audit-translations.cjs",
     "build": "node scripts/build-multiplatform.cjs",
+    "pretest:packages": "node scripts/prepare-package-test.cjs",
     "test:packages": "node tests/multiplatform.test.cjs"
   },
   "engines": {
