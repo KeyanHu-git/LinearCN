@@ -15,17 +15,6 @@
   <a href="LICENSE"><img alt="GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue"></a>
 </p>
 
-## Linear 的中文界面
-
-LinearCN 使用人工维护的词表和轻量 DOM 规则，为 Linear 提供简体中文界面。
-
-- 覆盖导航、议题、项目、周期、设置、集成、登录和智能体页面。
-- 统一常用术语，例如 `issue → 议题`、`assignee → 负责人`、`triage → 分诊`。
-- 支持动态数字、工作区名称、时间文案、弹层和异步加载内容。
-- 对界面变化进行增量翻译，保持页面更新流畅。
-- 同一套词表用于浏览器、Userscript 和 Windows 桌面端。
-- 通过回归测试与质量审计持续检查漏译、冲突和语义错误。
-
 ## 支持平台
 
 | 平台 | 使用方式 |
