@@ -266,6 +266,10 @@ globalThis.LinearCNQualityEntries = [
     "仅适用于您，并覆盖工作区默认设置"
   ],
   [
+    "then",
+    "后按"
+  ],
+  [
     "Open",
     "打开"
   ],

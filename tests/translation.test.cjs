@@ -19,6 +19,7 @@ for (const file of ["translations-base.js", "translations-enhanced.js", "transla
 const translate = context.globalThis.LinearCNEngine.translateString;
 
 assert.equal(translate("Display options"), "显示选项");
+assert.equal(translate("then"), "后按");
 assert.equal(translate("  Add filter  "), "  添加筛选器  ");
 assert.equal(translate("3 issues"), "3 个议题");
 assert.equal(translate("Created yesterday"), "创建于 yesterday");
