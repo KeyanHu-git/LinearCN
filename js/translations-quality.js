@@ -267,7 +267,19 @@ globalThis.LinearCNQualityEntries = [
   ],
   [
     "then",
-    "后按"
+    "→"
+  ],
+  [
+    "Shortcut",
+    "快捷键"
+  ],
+  [
+    "Enter",
+    "Enter"
+  ],
+  [
+    "escape",
+    "Esc"
   ],
   [
     "Open",

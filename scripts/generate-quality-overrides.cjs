@@ -33,7 +33,10 @@ for (const [source, target] of effective) {
 }
 
 const explicit = new Map([
-  ["then", "后按"],
+  ["then", "→"],
+  ["Shortcut", "快捷键"],
+  ["Enter", "Enter"],
+  ["escape", "Esc"],
   ["Open", "打开"],
   [" archived the project", "归档了项目"],
   ["Open archive", "打开归档"],
