@@ -1,6 +1,6 @@
 # LinearCN Windows 桌面安装器
 
-支持 Linear Desktop 1.32.2。
+支持 Linear Desktop 1.32.2 及后续具备兼容启动结构的版本。安装后会自动检测 Linear 更新并恢复汉化。
 
 ## 安装
 

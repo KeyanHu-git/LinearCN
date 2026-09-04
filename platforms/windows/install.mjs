@@ -1,20 +1,22 @@
 /**
- * Fail-closed Windows desktop installer.
+ * Update-resilient Windows desktop installer.
  *
- * The installer validates the Linear version and one exact patch point, creates
- * a non-overwriting backup, records hashes, and keeps rollback state beside the
- * installed runtime. It never distributes Linear application code.
+ * It validates a structural patch point, stores rollback data outside Linear's
+ * replaceable program directory, and installs a per-user repair worker.
  */
 import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import process from "node:process";
+import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createPackage, extractAll } from "@electron/asar";
+import { compareVersions, isPatched, LINEARCN_VERSION, MINIMUM_LINEAR_VERSION, patchMain } from "./patch-core.mjs";
 
-const VERSION = "1.0.0";
-const SUPPORTED_LINEAR_VERSION = "1.32.2";
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const RUN_KEY = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+const RUN_VALUE = "LinearCN Maintenance";
 
 function parseArgs(argv) {
   const args = { dryRun: false, uninstall: false, appAsar: null };
@@ -47,13 +49,17 @@ function findAppAsar(explicitPath) {
   return unique[0];
 }
 
-function extensionRoot() {
+function linearcnRoot() {
   if (!process.env.APPDATA) throw new Error("缺少 APPDATA，无法确定 Linear 用户数据目录");
-  return path.join(process.env.APPDATA, "Linear", "extensions", "LinearCN", VERSION);
+  return path.join(process.env.APPDATA, "Linear", "extensions", "LinearCN");
+}
+
+function extensionRoot() {
+  return path.join(linearcnRoot(), LINEARCN_VERSION);
 }
 
 function stateFile() {
-  return path.join(path.dirname(extensionRoot()), "install-state.json");
+  return path.join(linearcnRoot(), "install-state.json");
 }
 
 function copyRuntime(destination) {
@@ -63,28 +69,79 @@ function copyRuntime(destination) {
   fs.cpSync(source, destination, { recursive: true, force: true });
 }
 
-function patchMain(source) {
-  if (source.includes("LinearCN Enhanced") || source.includes("LinearCN 1.0.0 loaded")) {
-    throw new Error("检测到现有 LinearCN 补丁；请先回滚旧版本");
+function copyMaintenance() {
+  const destination = path.join(linearcnRoot(), "maintenance");
+  const runtimeSource = path.join(scriptDir, "runtime", "node.exe");
+  const modulesSource = path.join(scriptDir, "node_modules");
+  if (!fs.existsSync(runtimeSource) || !fs.existsSync(path.join(modulesSource, "@electron", "asar"))) {
+    throw new Error("安装包缺少自动维护运行时");
   }
-  const needle = "if(!await UO()){Wj=";
-  const count = source.split(needle).length - 1;
-  if (count !== 1) throw new Error(`不支持的 Linear 构建：补丁点数量为 ${count}`);
-  const loader = [
-    "if(!await UO()){",
-    "try{let e=r.session.defaultSession,n=e.extensions?.loadExtension?e.extensions.loadExtension.bind(e.extensions):e.loadExtension.bind(e);",
-    "await n(t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.0.0`)),",
-    "X.info(`LinearCN 1.0.0 loaded`,{logToDisk:!0})}",
-    "catch(e){X.error(`Failed to load LinearCN extension`,e,void 0,{logToDisk:!0})}",
-    "try{let e=t.join(r.app.getPath(`userData`),`extensions`,`LinearCN`,`1.0.0`,`js`,`agent-fallback.js`),",
-    "n=c.readFileSync(e,`utf8`),i=e=>{let t=()=>{e.isDestroyed()||e.executeJavaScript(n,!0).catch(e=>X.warn(`LinearCN fallback injection failed`,e))};",
-    "e.on(`dom-ready`,t),e.on(`did-navigate-in-page`,t),e.getURL()&&setTimeout(t,0)};",
-    "r.app.on(`web-contents-created`,(e,t)=>i(t)),r.webContents.getAllWebContents().forEach(i),",
-    "X.info(`LinearCN Agent fallback registered`,{logToDisk:!0})}",
-    "catch(e){X.error(`Failed to register LinearCN Agent fallback`,e,void 0,{logToDisk:!0})}",
-    "Wj="
-  ].join("");
-  return source.replace(needle, loader);
+
+  fs.mkdirSync(destination, { recursive: true });
+  for (const file of ["repair.mjs", "patch-core.mjs", "package.json"]) {
+    fs.copyFileSync(path.join(scriptDir, file), path.join(destination, file));
+  }
+  fs.mkdirSync(path.join(destination, "runtime"), { recursive: true });
+  fs.copyFileSync(runtimeSource, path.join(destination, "runtime", "node.exe"));
+  fs.cpSync(modulesSource, path.join(destination, "node_modules"), { recursive: true, force: true });
+
+  const node = path.join(destination, "runtime", "node.exe");
+  const repair = path.join(destination, "repair.mjs");
+  const command = `"${node}" "${repair}" --watch`.replaceAll('"', '""');
+  const launcher = path.join(destination, "launch-maintenance.vbs");
+  fs.writeFileSync(launcher, `CreateObject("WScript.Shell").Run "${command}", 0, False\r\n`, "utf8");
+
+  const registration = spawnSync("reg.exe", ["add", RUN_KEY, "/v", RUN_VALUE, "/t", "REG_SZ", "/d", `wscript.exe //B "${launcher}"`, "/f"], {
+    windowsHide: true,
+    encoding: "utf8"
+  });
+  if (registration.status !== 0) throw new Error(`无法注册自动维护：${registration.stderr || registration.stdout}`);
+  const worker = spawn("wscript.exe", ["//B", launcher], { detached: true, stdio: "ignore", windowsHide: true });
+  worker.unref();
+  return destination;
+}
+
+function backupPath(linearVersion, hash) {
+  return path.join(linearcnRoot(), "backups", `Linear-${linearVersion}-${hash.slice(0, 12)}.asar`);
+}
+
+async function inspectAndPatch(appAsar, dryRun) {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "linearcn-install-"));
+  const patchedAsar = path.join(path.dirname(appAsar), `app.asar.linearcn-next-${process.pid}`);
+  try {
+    await extractAll(appAsar, tempRoot);
+    const packageJson = JSON.parse(fs.readFileSync(path.join(tempRoot, "package.json"), "utf8"));
+    if (compareVersions(packageJson.version, MINIMUM_LINEAR_VERSION) < 0) {
+      throw new Error(`Linear ${packageJson.version} 低于最低支持版本 ${MINIMUM_LINEAR_VERSION}`);
+    }
+
+    const mainFile = path.join(tempRoot, "out", "main", "index.js");
+    const source = fs.readFileSync(mainFile, "utf8");
+    const alreadyPatched = isPatched(source);
+    const result = alreadyPatched ? { source, changed: false } : patchMain(source);
+    const beforeHash = sha256(appAsar);
+    const summary = {
+      appAsar,
+      linearVersion: packageJson.version,
+      minimumLinearVersion: MINIMUM_LINEAR_VERSION,
+      alreadyPatched,
+      dryRun
+    };
+    console.log(JSON.stringify(summary, null, 2));
+    if (dryRun || alreadyPatched) return { ...summary, beforeHash, afterHash: beforeHash, backup: null };
+
+    fs.writeFileSync(mainFile, result.source, "utf8");
+    await createPackage(tempRoot, patchedAsar);
+    const afterHash = sha256(patchedAsar);
+    const backup = backupPath(packageJson.version, beforeHash);
+    fs.mkdirSync(path.dirname(backup), { recursive: true });
+    if (!fs.existsSync(backup)) fs.copyFileSync(appAsar, backup, fs.constants.COPYFILE_EXCL);
+    fs.copyFileSync(patchedAsar, appAsar);
+    return { ...summary, beforeHash, afterHash, backup };
+  } finally {
+    fs.rmSync(patchedAsar, { force: true });
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
 }
 
 async function install(args) {
@@ -94,41 +151,35 @@ async function install(args) {
     throw new Error(`app.asar 路径无效：${appAsar}`);
   }
 
-  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "linearcn-"));
-  try {
-    extractAll(appAsar, tempRoot);
-    const packageJson = JSON.parse(fs.readFileSync(path.join(tempRoot, "package.json"), "utf8"));
-    if (packageJson.version !== SUPPORTED_LINEAR_VERSION) {
-      throw new Error(`仅支持 Linear ${SUPPORTED_LINEAR_VERSION}，检测到 ${packageJson.version}`);
-    }
-    const mainFile = path.join(tempRoot, "out", "main", "index.js");
-    const patched = patchMain(fs.readFileSync(mainFile, "utf8"));
-    fs.writeFileSync(mainFile, patched, "utf8");
-    const patchedAsar = path.join(os.tmpdir(), `linearcn-app-${process.pid}.asar`);
-    await createPackage(tempRoot, patchedAsar);
-    const beforeHash = sha256(appAsar);
-    const afterHash = sha256(patchedAsar);
+  const result = await inspectAndPatch(appAsar, args.dryRun);
+  if (args.dryRun) return;
+  copyRuntime(extensionRoot());
+  const maintenance = copyMaintenance();
 
-    console.log(JSON.stringify({ appAsar, linearVersion: packageJson.version, beforeHash, afterHash, dryRun: args.dryRun }, null, 2));
-    if (args.dryRun) {
-      fs.rmSync(patchedAsar, { force: true });
-      return;
-    }
+  if (!result.alreadyPatched) {
+    fs.writeFileSync(stateFile(), JSON.stringify({
+      version: LINEARCN_VERSION,
+      linearVersion: result.linearVersion,
+      appAsar,
+      backup: result.backup,
+      beforeHash: result.beforeHash,
+      afterHash: result.afterHash,
+      installedAt: new Date().toISOString()
+    }, null, 2), "utf8");
+  } else if (!fs.existsSync(stateFile())) {
+    throw new Error("检测到已有补丁，但缺少安装状态；无法建立可靠回滚点");
+  }
+  console.log(`安装完成，自动维护已启用：${maintenance}`);
+}
 
-    const runtimeDestination = extensionRoot();
-    copyRuntime(runtimeDestination);
-    const backup = `${appAsar}.linearcn-backup-${VERSION}`;
-    if (fs.existsSync(backup)) throw new Error(`备份已存在，拒绝覆盖：${backup}`);
-    fs.copyFileSync(appAsar, backup, fs.constants.COPYFILE_EXCL);
-    fs.copyFileSync(patchedAsar, appAsar);
-    fs.rmSync(patchedAsar, { force: true });
-    fs.writeFileSync(stateFile(), JSON.stringify({ version: VERSION, appAsar, backup, beforeHash, afterHash }, null, 2), "utf8");
-    console.log("安装完成。请启动 Linear。");
-  } finally {
-    const resolvedTemp = fs.realpathSync(tempRoot);
-    const resolvedSystemTemp = fs.realpathSync(os.tmpdir());
-    if (!resolvedTemp.startsWith(resolvedSystemTemp + path.sep)) throw new Error("临时目录校验失败，未清理");
-    fs.rmSync(resolvedTemp, { recursive: true, force: true });
+function stopMaintenance() {
+  spawnSync("reg.exe", ["delete", RUN_KEY, "/v", RUN_VALUE, "/f"], { windowsHide: true, encoding: "utf8" });
+  const pidFile = path.join(linearcnRoot(), "maintenance", "watch.pid");
+  if (fs.existsSync(pidFile)) {
+    const pid = Number.parseInt(fs.readFileSync(pidFile, "utf8"), 10);
+    if (Number.isInteger(pid)) {
+      try { process.kill(pid); } catch {}
+    }
   }
 }
 
@@ -138,10 +189,13 @@ function uninstall() {
   const state = JSON.parse(fs.readFileSync(statePath, "utf8"));
   const appAsar = path.resolve(state.appAsar);
   const backup = path.resolve(state.backup);
-  if (path.dirname(appAsar) !== path.dirname(backup)) throw new Error("备份路径不在 app.asar 同一目录，拒绝回滚");
-  if (!fs.existsSync(backup)) throw new Error(`备份不存在：${backup}`);
+  if (!fs.existsSync(appAsar) || !fs.existsSync(backup)) throw new Error("当前程序或回滚备份不存在");
+  if (sha256(appAsar) !== state.afterHash || sha256(backup) !== state.beforeHash) {
+    throw new Error("当前 Linear 与安装记录不一致，拒绝恢复错误版本");
+  }
+  stopMaintenance();
   fs.copyFileSync(backup, appAsar);
-  console.log("已恢复原始 app.asar。扩展运行文件保留，可手动删除。");
+  console.log("已恢复当前 Linear 的原始 app.asar，并停用自动维护。");
 }
 
 const args = parseArgs(process.argv.slice(2));

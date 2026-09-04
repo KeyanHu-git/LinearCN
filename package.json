@@ -5,7 +5,7 @@
   "license": "GPL-3.0-only",
   "scripts": {
     "generate": "node scripts/generate-quality-overrides.cjs",
-    "test": "node tests/translation.test.cjs && node tests/repository-structure.test.cjs",
+    "test": "node tests/translation.test.cjs && node tests/windows-patch.test.mjs && node tests/repository-structure.test.cjs",
     "labels:check": "node scripts/sync-github-labels.mjs --check",
     "audit": "node scripts/audit-translations.cjs",
     "build": "node scripts/build-multiplatform.cjs",

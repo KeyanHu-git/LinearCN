@@ -88,7 +88,7 @@ fs.writeFileSync(path.join(userscriptDir, "LinearCN.user.js"), userscriptHeader 
 
 const windowsDir = path.join(distRoot, "windows-desktop");
 ensure(windowsDir);
-for (const file of ["package.json", "README.md", "install.mjs", "install.cmd", "uninstall.cmd"]) {
+for (const file of ["package.json", "README.md", "install.mjs", "repair.mjs", "patch-core.mjs", "install.cmd", "uninstall.cmd"]) {
   fs.copyFileSync(path.join(root, "platforms", "windows", file), path.join(windowsDir, file));
 }
 copyRuntime(path.join(windowsDir, "extension"), manifest, true);

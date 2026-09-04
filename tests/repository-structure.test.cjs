@@ -54,6 +54,8 @@ for (const file of [
   "js/content.js",
   "js/content.legacy.js",
   "platforms/windows/install.mjs",
+  "platforms/windows/repair.mjs",
+  "platforms/windows/patch-core.mjs",
   "scripts/audit-translations.cjs",
   "scripts/build-multiplatform.cjs",
   "scripts/generate-quality-overrides.cjs"

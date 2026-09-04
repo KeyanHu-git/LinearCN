@@ -25,6 +25,8 @@ for (const file of packagedDocs) assert.ok(fs.existsSync(path.join(dist, "chromi
 assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "extension", "js", "agent-fallback.js")));
 assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "install.cmd")));
 assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "uninstall.cmd")));
+assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "repair.mjs")));
+assert.ok(fs.existsSync(path.join(dist, "windows-desktop", "patch-core.mjs")));
 assert.ok(fs.existsSync(path.join(dist, "macos", "safari-webextension", "manifest.json")));
 assert.ok(fs.existsSync(path.join(dist, "macos", "LinearCN.user.js")));
 
