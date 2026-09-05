@@ -26,7 +26,7 @@ LinearCN 持续跟进 Linear 的界面更新，重点修复旧汉化在新版设
 | Chrome、Edge、Brave、Arc、Opera | Chromium 扩展 |
 | Firefox 桌面版 | Firefox 扩展 |
 | Userscript | 用户脚本管理器 |
-| Linear Windows Desktop 1.32.2 | 桌面安装器 |
+| Linear Windows Desktop | 桌面安装器 |
 | macOS | 浏览器扩展或 Userscript |
 
 各平台安装包都在 [Releases](https://github.com/KeyanHu-git/LinearCN/releases/latest)。

@@ -8,6 +8,7 @@
 | `ISSUE_TEMPLATE/` | 漏译、错译、故障和功能建议的结构化入口 |
 | `workflows/labels.yml` | 在标签规范变化时同步 GitHub 标签 |
 | `workflows/release.yml` | 在推送版本标签时测试、构建并发布多端包 |
+| `workflows/ci.yml` | 在主分支提交和 PR 中运行 Windows、Linux 验证 |
 
 ## 标签模型
 

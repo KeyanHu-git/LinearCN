@@ -1,6 +1,8 @@
 # LinearCN Windows 桌面安装器
 
-支持 Linear Desktop 1.32.2 及后续具备兼容启动结构的版本。安装后会自动检测 Linear 更新并恢复汉化。
+安装时检查 Linear 启动结构。维护任务由 Windows 在登录时启动，退出后自动重试；每 15 秒检查一次程序状态。
+
+Linear 更新后，关闭 Linear 即可自动修复。也可打开 `%APPDATA%\Linear\extensions\LinearCN\LinearCN.vbs`，先检查汉化再启动。更新器若已启动新版，当前会话需退出一次。
 
 ## 安装
 
@@ -18,4 +20,4 @@ install.cmd --dry-run
 
 双击 `uninstall.cmd`。
 
-安装器会校验路径、Linear 版本和唯一补丁点；任何条件不满足都会停止，不会猜测修改。
+安装状态与原始备份保存在 `%APPDATA%\Linear\extensions\LinearCN`。维护结果见 `maintenance\health.json`。

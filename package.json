@@ -1,11 +1,12 @@
 {
   "name": "linearcn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "license": "GPL-3.0-only",
   "scripts": {
     "generate": "node scripts/generate-quality-overrides.cjs",
     "test": "node tests/translation.test.cjs && node tests/windows-patch.test.mjs && node tests/repository-structure.test.cjs",
+    "test:desktop": "node tests/windows-archive.test.mjs",
     "labels:check": "node scripts/sync-github-labels.mjs --check",
     "audit": "node scripts/audit-translations.cjs",
     "build": "node scripts/build-multiplatform.cjs",

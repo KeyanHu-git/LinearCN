@@ -5,9 +5,9 @@
  * names, and it proceeds only when exactly one compatible insertion point is
  * present.
  */
-export const LINEARCN_VERSION = "1.0.0";
+export const LINEARCN_VERSION = "1.0.1";
 export const MINIMUM_LINEAR_VERSION = "1.32.2";
-export const PATCH_MARKER = `LinearCN ${LINEARCN_VERSION} loaded`;
+export const PATCH_MARKER = `LinearCN ${LINEARCN_VERSION} loaded (loader-2)`;
 
 const READY_HANDLER = /([A-Za-z_$][\w$]*)\.app\.on\(`ready`,async\(\)=>\{if\(!await [A-Za-z_$][\w$]*\(\)\)\{/g;
 
@@ -28,6 +28,9 @@ export function isPatched(source) {
 
 export function patchMain(source) {
   if (isPatched(source)) return { source, changed: false };
+  if (/LinearCN.*loaded|LinearCN Enhanced/.test(source)) {
+    throw new Error("已有旧版补丁，需要从已验证的原始备份升级");
+  }
 
   const matches = [...source.matchAll(READY_HANDLER)];
   if (matches.length !== 1) {
@@ -43,15 +46,19 @@ export function patchMain(source) {
     "await n(e.join(",
     electron,
     `.app.getPath(\`userData\`),\`extensions\`,\`LinearCN\`,\`${LINEARCN_VERSION}\`)),`,
-    `console.info(\`${PATCH_MARKER}\`)`,
+    `console.info(\`${PATCH_MARKER}\`);`,
+    "require(`fs`).writeFileSync(e.join(",
+    electron,
+    `.app.getPath(\`userData\`),\`extensions\`,\`LinearCN\`,\`loader-status.json\`),JSON.stringify({version:\`${LINEARCN_VERSION}\`,loadedAt:new Date().toISOString()}))`,
     "}catch(e){console.error(`Failed to load LinearCN extension`,e)}",
     "try{",
     "let e=require(`path`).join(",
     electron,
     `.app.getPath(\`userData\`),\`extensions\`,\`LinearCN\`,\`${LINEARCN_VERSION}\`,\`js\`,\`agent-fallback.js\`),`,
-    "t=require(`fs`).readFileSync(e,`utf8`),n=e=>{",
-    "let t=()=>{e.isDestroyed()||e.executeJavaScript(n,!0).catch(e=>console.warn(`LinearCN fallback injection failed`,e))};",
-    "e.on(`dom-ready`,t),e.on(`did-navigate-in-page`,t),e.getURL()&&setTimeout(t,0)};",
+    "script=require(`fs`).readFileSync(e,`utf8`),n=contents=>{",
+    "let inject=()=>{if(contents.isDestroyed())return;let url;try{url=new URL(contents.getURL())}catch{return}if(url.protocol!==`https:`||!(url.hostname===`linear.app`||url.hostname.endsWith(`.linear.app`)))return;",
+    "contents.executeJavaScript(script,!0).catch(e=>console.warn(`LinearCN fallback injection failed`,e))};",
+    "contents.on(`dom-ready`,inject),contents.on(`did-navigate-in-page`,inject),contents.getURL()&&setTimeout(inject,0)};",
     electron,
     ".app.on(`web-contents-created`,(e,t)=>n(t)),",
     electron,

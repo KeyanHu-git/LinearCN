@@ -3,7 +3,7 @@
   "name": "LinearCN",
   "short_name": "LinearCN",
   "description": "面向新版 Linear 的增强简体中文本地化",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icons": {
     "16": "img/favicon-16x16.png",
     "48": "img/favicon-48x48.png",

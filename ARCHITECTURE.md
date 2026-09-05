@@ -39,7 +39,7 @@ LinearCN 将“翻译内容”“运行时引擎”“平台交付”和“维�
 
 ### 平台适配
 
-浏览器直接加载核心运行时。Userscript 由构建脚本拼接同一组文件。Windows 安装器只负责安全加载扩展与独立 WebContents 兜底；未知 Linear 版本必须失败关闭。
+浏览器直接加载核心运行时。Userscript 由构建脚本拼接同一组文件。Windows 安装器和维护程序共用 `archive.mjs` 的安装事务；检查程序身份、版本下限及唯一启动补丁点。原始备份、待完成事务和安装状态保存在用户目录。Windows 计划任务负责维护程序的登录启动和退出恢复；维护程序在 Linear 关闭时修复，启动入口在修复后打开 Linear。
 
 ### 工具链
 
@@ -77,7 +77,10 @@ LinearCN 将“翻译内容”“运行时引擎”“平台交付”和“维�
 ```bash
 npm run generate
 npm test
+npm run test:desktop
 npm run audit
 npm run build
 npm run test:packages
 ```
+
+桌面事务测试需要先执行 `npm ci --prefix platforms/windows --ignore-scripts`。每次发布使用新的补丁版本，标签与安装包版本一致；已发布的附件不再被其他提交覆盖。

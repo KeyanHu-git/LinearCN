@@ -8,7 +8,7 @@ LinearCN 使用同一套词表和 DOM 翻译引擎，通过不同运行壳适配
 | Firefox 桌面版 | Firefox Manifest V3 扩展 | 支持 |
 | Firefox Android 网页版 | Firefox 扩展 | 实验性；不等同于 Linear 原生 Android 应用 |
 | Safari、其他支持用户脚本的浏览器 | Userscript | 实验性，需要用户脚本管理器 |
-| Linear Windows 桌面端 | Electron 本地安装器 | 已在 Linear 1.32.2 验证 |
+| Linear Windows 桌面端 | Electron 本地安装器 | 启动结构兼容检查；1.32.4 本地验证 |
 | Linear macOS 桌面端 | 不修改官方应用 | 不提供；修改应用包会破坏代码签名，建议使用 Web 端 |
 | Linear iOS/Android 原生应用 | 无安全注入点 | 不支持；需要 Linear 官方提供本地化 |
 
